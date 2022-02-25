@@ -7,11 +7,9 @@ const loadMeal = () => {
     });
 };
 
-loadMeal();
-
 const displayMeal = (items) => {
+  document.getElementById("meal-container").textContent = "";
   for (const item of items) {
-    console.log(item);
     const mealContainer = document.getElementById("meal-container");
     const div = document.createElement("div");
     div.setAttribute("class", "mx-auto");
@@ -26,3 +24,22 @@ const displayMeal = (items) => {
     mealContainer.appendChild(div);
   }
 };
+
+const loadMealByName = async () => {
+  const searchText = findText();
+  if (searchText != "") {
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    displayMeal(data.meals);
+  } else {
+    document.getElementById("meal-container").textContent = "";
+  }
+};
+
+const findText = () => {
+  const inputText = document.getElementById("search-text").value;
+  document.getElementById("search-text").value = "";
+  return inputText;
+};
+loadMeal();
