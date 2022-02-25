@@ -9,9 +9,10 @@ const showAll = (records) => {
     console.log(sport);
     const sportContainer = document.getElementById("sport-container");
     const div = document.createElement("div");
+    div.setAttribute("id", "sport-card");
     div.innerHTML = `
     <img class="h-64 w-64 my-2 mx-auto"  src=${sport.strSportThumb} alt="">
-    <h3 class="mx-3 ">${sport.strSport}</h3>
+    <h3 class="mx-3 text-2xl ">${sport.strSport}</h3>
     <p class="mx-3 mb-3">${sport.strSportDescription.slice(0, 200)}...</p>
     `;
 
