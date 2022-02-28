@@ -17,9 +17,11 @@ const showCountry = (countries) => {
     `;
     countryContainer.appendChild(div);
   }
+  toggleSpinner("none");
 };
 
 document.getElementById("seaech-btn").addEventListener("click", async () => {
+  toggleSpinner("flex");
   const searchText = findText();
   if (searchText != "") {
     const response = await fetch(
@@ -30,12 +32,17 @@ document.getElementById("seaech-btn").addEventListener("click", async () => {
   } else {
     alert("No country name found");
   }
+  toggleSpinner("none");
 });
 
 const findText = () => {
-  const inputText = document.getElementById("search-text").value;
-  document.getElementById("search-text").value = "";
+  const inputText = document.getElementById("find-text").value;
+  document.getElementById("find-text").value = "";
   return inputText;
+};
+
+const toggleSpinner = (displayStyle) => {
+  document.getElementById("loader").style.display = displayStyle;
 };
 
 loadAllCountrues();
