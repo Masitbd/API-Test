@@ -11,6 +11,16 @@
 width: 400px;
 }
 
+
+.user{
+  font-size: 50px;
+  color: brown;
+}
+.name{
+  font-size: 30px;
+  color: white;
+  margin-left: 20px;
+}
 /* spinner */
 
 #loader {

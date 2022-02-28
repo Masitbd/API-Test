@@ -23,18 +23,27 @@ const displayMeal = (items) => {
 
     mealContainer.appendChild(div);
   }
+  toggleSpinner("none");
 };
 
 const loadMealByName = async () => {
+  toggleSpinner("flex");
   const searchText = findText();
   if (searchText != "") {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
     const response = await fetch(url);
     const data = await response.json();
-    displayMeal(data.meals);
+    console.log(data);
+    if (!data.meals) {
+      toggleSpinner("none");
+      // alert("no data found");
+    } else {
+      displayMeal(data.meals);
+    }
   } else {
     document.getElementById("meal-container").textContent = "";
   }
+  toggleSpinner("none");
 };
 
 const findText = () => {
@@ -42,4 +51,9 @@ const findText = () => {
   document.getElementById("search-text").value = "";
   return inputText;
 };
+
+const toggleSpinner = (displayStyle) => {
+  document.getElementById("loader").style.display = displayStyle;
+};
+
 loadMeal();
